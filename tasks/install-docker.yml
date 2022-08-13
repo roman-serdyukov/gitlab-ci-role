@@ -1,0 +1,29 @@
+---
+# Tasks file for install Docker
+
+- name: Gitlab-ci | Update apt cache
+  become: true
+  apt: 
+    update_cache: yes 
+    cache_valid_time: 3600
+  ignore_errors: true
+
+- name: Gitlab-ci | Install docker
+  become: true
+  ansible.builtin.apt:
+    name: 
+      - docker
+      - docker-compose
+    state: latest
+
+#- name: Installing tools
+#  become: true
+#  ansible.builtin.apt:
+#    name:
+#      - git
+#      - curl
+#    state: present
+#    update_cache: yes
+  
+#- name: Installing docker
+#  ansible.builtin.command: curl -fsSL https://get.docker.com -o get-docker.sh && chmod +x get-docker.sh && ./get-docker.sh

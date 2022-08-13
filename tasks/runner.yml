@@ -1,0 +1,80 @@
+- name: Runner | Update apt cache
+  become: true
+  apt: 
+    update_cache: yes 
+    cache_valid_time: 3600
+  ignore_errors: true
+
+- name: Runner | Install packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - curl
+      - python3 
+      - ansible
+      - python3-pip
+    state: latest
+
+- name: Runner | Pip upgrade
+  become: true
+  ansible.builtin.command: pip install --upgrade cryptography cffi \ pip install --upgrade pip wheel
+
+- name: Runner | Upgrade ansible
+  ansible.builtin.pip:
+    name:
+      - ansible
+    state: latest
+    extra_args: --user
+
+- name: Install multi python packages with version specifiers
+  ansible.builtin.pip:
+    name:
+      - ansible-lint==4.0.0
+
+- name: Runner | Download settings repository file
+  ansible.builtin.get_url:
+    url: https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh
+    dest: /home/{{ ansible_user }}
+    mode: '0777'
+
+- name: Runner | Add apt package gitlab-runner
+  become: true
+  ansible.builtin.command: ./script.deb.sh
+
+- name: Runner | Install gitlab-runner
+  become: true
+  ansible.builtin.apt:
+    name:
+      - gitlab-runner
+    state: latest
+
+- name: Gitlab-ci | Give rights
+  become: true
+  ansible.builtin.command: usermod -aG docker gitlab-runner
+
+#- name: Runner | copy ssh key
+#  become: true
+#  ansible.builtin.template:
+#    src: /home/roman/.ssh/id_rsa.netology
+#    dest: /home/{{ ansible_user }}/.ssh/id_rsa.netology
+
+- name: Runner | Copy config.toml ans register
+  become: true
+  ansible.builtin.template:
+    src: templates/config.j2
+    dest: /etc/gitlab-runner/config.toml
+  notify: Restart runner
+
+- name: Runner | Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Runner | Get register info
+  become: true
+  ansible.builtin.command: gitlab-runner list
+  register: runner_status
+
+- name: Runner | Show runner status
+  debug:
+    var: runner_status.stdout
+
+

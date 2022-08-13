@@ -1,0 +1,24 @@
+---
+# defaults file for gitlab-ci
+runner: runner
+gitlab: gitlab
+
+gitlab_pass:  gitlab_pass
+token_ce:     T0kenF0rRunners
+
+gitlab_host: gitlab.reserdukov.ru
+
+gitlab_url:   http://gitlab.reserdukov.ru
+gitlab_urls:  https://gitlab.reserdukov.ru
+
+http_port:  "80"
+ssh_port:   "8822"
+
+db1_ip:          "192.168.31.3"    
+db2_ip:          "192.168.31.4"    
+www_ip:          "192.168.5.3"     
+gitlab_ip:       "192.168.6.3"     
+runner_ip:       "192.168.6.4"     
+alertmanager_ip: "192.168.8.3"     
+prometheus_ip:   "192.168.8.4"   
+grafana_ip:      "192.168.8.5"

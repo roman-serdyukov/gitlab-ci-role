@@ -1,0 +1,9 @@
+---
+# handlers file for gitlab-ci
+- name: Restart docker runner
+  become: true
+  ansible.builtin.command: docker exec -it {{ runner }} gitlab-runner restart
+
+- name: Restart runner
+  become: true
+  ansible.builtin.command: gitlab-runner restart
