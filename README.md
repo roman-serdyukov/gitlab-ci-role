@@ -31,7 +31,7 @@ Example Playbook
 - name: Install gitlab ci
   hosts: servers
   roles:
-    - { role: gitlab-ci-role, when: ansible_lsb.id == 'Ubuntu' }
+    - gitlab-ci-role
 ```
 
 Before start
