@@ -1,5 +1,2 @@
 ---
 # vars file for gitlab-ci
-
-ansible_user: ubuntu
-ansible_ssh_private_key: /home/roman/.ssh/id_rsa.netology.pub

@@ -6,10 +6,14 @@ gitlab: gitlab
 gitlab_pass:  gitlab_pass
 token_ce:     T0kenF0rRunners
 
-gitlab_host: gitlab.reserdukov.ru
+my_domain: your_domain
 
-gitlab_url:   http://gitlab.reserdukov.ru
-gitlab_urls:  https://gitlab.reserdukov.ru
+gitlab_host: gitlab.{{ my_domain }}
+
+
+gitlab_url:   http://{{ gitlab }}.{{ my_domain }}
+gitlab_urls:  https://{{ gitlab }}.{{ my_domain }}
+
 
 http_port:  "80"
 ssh_port:   "8822"

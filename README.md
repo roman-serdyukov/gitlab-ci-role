@@ -3,9 +3,9 @@ Apps-role
 
 Ansible role для установки gitlab-ce и gitlab-runner. Есть 2 варианта установки - обычный (по умолчанию) и docker контейнер (требует корректировки main.yml)
 Состоит из следующих действий:
-- Установка Docker install-docker.yml.
-- Установка и настройка gitlab-ce gitlab.yml (или docker-gitlab.yml).
-- Установка и настройка gitlab-runner runner.yml (или docker-runner.yml).
+- Установка Docker [install-docker.yml](https://github.com/roman-serdyukov/gitlab-ci-role/blob/main/tasks/install-docker.yml).
+- Установка и настройка gitlab-ce [gitlab.yml](https://github.com/roman-serdyukov/gitlab-ci-role/blob/main/tasks/gitlab.yml) (или [docker-gitlab.yml](https://github.com/roman-serdyukov/gitlab-ci-role/blob/main/tasks/docker-gitlab.yml)).
+- Установка и настройка gitlab-runner [runner.yml](https://github.com/roman-serdyukov/gitlab-ci-role/blob/main/tasks/runner.yml) (или [docker-runner.yml](https://github.com/roman-serdyukov/gitlab-ci-role/blob/main/tasks/docker-runner.yml)).
 
 Requirements
 ------------
@@ -18,6 +18,7 @@ Role Variables
 
 - runner:       имя хоста runner
 - gitlab:       имя хоста gitlab
+- my_domain:    доменное имя
 - gitlab_pass:  пароль для gitlab
 - token_ce:     токен для runner
 - gitlab_host:  fqdn имя gitlab
