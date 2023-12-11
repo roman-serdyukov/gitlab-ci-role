@@ -30,7 +30,7 @@
     state: latest
     extra_args: --user
 
-- name: Install multi python packages with version specifiers
+- name: Runner | Install multi python packages with version specifiers
   ansible.builtin.pip:
     name:
       - ansible-lint==4.0.0
@@ -52,17 +52,11 @@
       - gitlab-runner
     state: latest
 
-- name: Gitlab-ci | Give rights
+- name: Runner | Give rights
   become: true
   ansible.builtin.command: usermod -aG docker gitlab-runner
 
-#- name: Runner | copy ssh key
-#  become: true
-#  ansible.builtin.template:
-#    src: /home/roman/.ssh/id_rsa.netology
-#    dest: /home/{{ ansible_user }}/.ssh/id_rsa.netology
-
-- name: Runner | Copy config.toml ans register
+- name: Runner | Copy config.toml and register
   become: true
   ansible.builtin.template:
     src: templates/config.j2

@@ -44,6 +44,10 @@
   ansible.builtin.shell: openssl rand -base64 48
   register: token_ce
 
+- name: Gitlab | Show token_ce
+  debug:
+    var: token_ce.stdout
+
 - name: Gitlab | Copy gitlab.rb
   become: true
   ansible.builtin.template:
