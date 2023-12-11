@@ -3,8 +3,8 @@
 runner: runner
 gitlab: gitlab
 
-gitlab_pass:  gitlab_pass
-token_ce:     T0kenF0rRunners
+gitlab_pass:  123Gitlab_p@ss
+# token_ce:
 
 my_domain: your_domain
 

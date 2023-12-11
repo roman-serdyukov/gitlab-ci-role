@@ -44,4 +44,4 @@
 
 - name: Docker {{ runner }} | Show runner status
   debug:
-    var: runner_status.stdout
+    var: runner_status

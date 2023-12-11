@@ -8,7 +8,6 @@
   include_tasks: install-docker.yml
   when: ansible_nodename == {{ runner }}
 
-
 - name: Install {{ gitlab }} | Configure and start
   include_tasks: gitlab.yml
   when: ansible_nodename == {{ gitlab }}

@@ -1,11 +1,11 @@
-- name: Girlab | Update apt cache
+- name: Gitlab | Update apt cache
   become: true
   apt: 
     update_cache: yes 
     cache_valid_time: 3600
   ignore_errors: true
 
-- name: Girlab | Install packages
+- name: Gitlab | Install packages
   become: true
   ansible.builtin.apt:
     name: 
@@ -16,36 +16,40 @@
       - perl
     state: latest
 
-- name: Girlab | Install postfix
+- name: Gitlab | Install postfix
   become: true
   ansible.builtin.apt:
     name:
       - postfix
     state: latest
 
-- name: Girlab | Download settings repository file
+- name: Gitlab | Download settings repository file
   ansible.builtin.get_url:
     url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh
     dest: /home/{{ ansible_user }}
     mode: '0777'
 
-- name: Girlab | Add gitlab repositiry
+- name: Gitlab | Add gitlab repositiry
   become: true
   ansible.builtin.command: ./script.deb.sh
 
-- name: Girlab | Install Gitlab
+- name: Gitlab | Install Gitlab
   become: true
   ansible.builtin.apt:
     name:
       - gitlab-ce
     state: latest
 
-- name: Girlab | Copy gitlab.rb
+- name: Gitlab | Generate token_ce
+  ansible.builtin.shell: openssl rand -base64 48
+  register: token_ce
+
+- name: Gitlab | Copy gitlab.rb
   become: true
   ansible.builtin.template:
     src: templates/gitlab.rb.j2
     dest: /etc/gitlab/gitlab.rb
 
-- name: Girlab | Reconfigure
+- name: Gitlab | Reconfigure
   become: true
   ansible.builtin.command: gitlab-ctl reconfigure

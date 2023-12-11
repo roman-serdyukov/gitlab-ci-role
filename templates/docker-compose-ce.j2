@@ -8,7 +8,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         gitlab_rails['initial_root_password'] = "{{ gitlab_pass }}"
-        gitlab_rails['initial_shared_runners_registration_token'] = "{{ token_ce }}"
+        gitlab_rails['initial_shared_runners_registration_token'] = "{{ token_ce.stdout }}"
         external_url '{{ gitlab_url }}'
         nginx['listen_port'] = 80
         nginx['listen_https'] = false

@@ -1,7 +1,7 @@
 [[runners]]
   name = "Docker Runner"
   url = "{{ gitlab_url }}"
-  token = "{{ token_ce }}"
+  token = "{{ token_ce.stdout }}"
   executor = "shell"
 # [runners.docker]
 #    tls_verify = false

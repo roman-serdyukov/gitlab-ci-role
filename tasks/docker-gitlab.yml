@@ -1,6 +1,10 @@
 ---
 # tasks file for gitlab-ce
 
+- name: Docker {{ gitlab }} | Generate token_ce
+  ansible.builtin.shell: openssl rand -base64 48
+  register: token_ce
+
 - name: Docker {{ gitlab }} | Copy Docker-compose file
   ansible.builtin.template:
     src: templates/docker-compose-ce.j2
