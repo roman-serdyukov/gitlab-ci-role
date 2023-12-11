@@ -12,8 +12,12 @@
       - curl
       - python3 
       - ansible
-      - python3-pip
+#      - python3-pip
     state: latest
+
+- name: Runner | Install pip
+  become: true
+  ansible.builtin.command: sudo python3 -m easy_install install pip
 
 - name: Runner | Pip upgrade
   become: true

@@ -19,7 +19,7 @@ Role Variables
 - runner:       имя хоста runner
 - gitlab:       имя хоста gitlab
 - my_domain:    доменное имя
-- gitlab_pass:  пароль для gitlab. Указан только для демонстрации. Не рекомендуется хранитьв открытом виде.
+- gitlab_pass:  пароль для gitlab. Указан только для демонстрации. Не рекомендуется хранить в открытом виде.
 - token_ce:     токен для runner (генерируется в play gitlab)
 - gitlab_host:  fqdn имя gitlab
 - gitlab_url:   полный url адрес gitlab-ce
