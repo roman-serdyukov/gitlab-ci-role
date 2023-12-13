@@ -69,12 +69,20 @@
 - name: Install runner | Flush handlers
   ansible.builtin.meta: flush_handlers
 
-- name: Runner | Get register info
+- name: Install runner | Register runner
+  become: true 
+  ansible.builtin.shell: gitlab-runner register --url {{ gitlab_url }} --registration-token {{ token_ce }} --executor docker --docker-image docker:stable --name runner_docker --non-interactive
+  register: runner_reg
+
+- name: Install runner | Show register status
+  debug: 
+    var: runner_reg
+
+- name: Install runner | Get register info
   become: true
   ansible.builtin.command: gitlab-runner list
   register: runner_status
 
-- name: Install runner | Show runner status
+- name: Install runner | Show runner list status
   debug:
     var: runner_status
-

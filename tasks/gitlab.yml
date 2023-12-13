@@ -52,8 +52,3 @@
 - name: Install gitlab | Reconfigure
   become: true
   ansible.builtin.command: gitlab-ctl reconfigure
-  register: reconfig
-
-- name: Install gitlab | Show reconfigure output
-  debug: 
-    var: reconfig
