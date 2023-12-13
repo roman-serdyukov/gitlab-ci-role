@@ -1,9 +1,5 @@
 ---
-# tasks file for gitlab-ce
-
-- name: Docker {{ gitlab }} | Generate token_ce
-  ansible.builtin.shell: openssl rand -base64 48
-  register: token_ce
+# Tasks for configure and run gitlab-ce in docker
 
 - name: Docker {{ gitlab }} | Copy Docker-compose file
   ansible.builtin.template:
@@ -25,8 +21,8 @@
   become: true
   docker_compose:
     project_src: /home/{{ ansible_user }}
-  register: output
+  register: output_gitlab
 
-- name: Show register
+- name: Docker {{ gitlab }} | Show register
   debug: 
-    var: output
+    var: output_gitlab

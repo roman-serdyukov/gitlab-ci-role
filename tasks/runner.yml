@@ -1,11 +1,14 @@
-- name: Runner | Update apt cache
+---
+# Tasks for install, configure and run gitlab-runner
+
+- name: Install runner | Update apt cache
   become: true
   apt: 
     update_cache: yes 
     cache_valid_time: 3600
   ignore_errors: true
 
-- name: Runner | Install packages
+- name: Install runner | Install packages
   become: true
   ansible.builtin.apt:
     name:
@@ -15,55 +18,55 @@
 #      - python3-pip
     state: latest
 
-- name: Runner | Install pip
+- name: Install runner | Install pip
   become: true
   ansible.builtin.command: sudo python3 -m easy_install install pip
 
-- name: Runner | Pip upgrade
+- name: Install runner | Pip upgrade
   become: true
   ansible.builtin.command: pip install --upgrade cryptography cffi \ pip install --upgrade pip wheel
 
-- name: Runner | Upgrade ansible
+- name: Install runner | Upgrade ansible
   ansible.builtin.pip:
     name:
       - ansible
     state: latest
     extra_args: --user
 
-- name: Runner | Install multi python packages with version specifiers
+- name: Install runner | Install multi python packages with version specifiers
   ansible.builtin.pip:
     name:
       - ansible-lint==4.0.0
 
-- name: Runner | Download settings repository file
+- name: Install runner | Download settings repository file
   ansible.builtin.get_url:
     url: https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh
     dest: /home/{{ ansible_user }}
     mode: '0777'
 
-- name: Runner | Add apt package gitlab-runner
+- name: Install runner | Add apt package gitlab-runner
   become: true
   ansible.builtin.command: ./script.deb.sh
 
-- name: Runner | Install gitlab-runner
+- name: Install runner | Install gitlab-runner
   become: true
   ansible.builtin.apt:
     name:
       - gitlab-runner
     state: latest
 
-- name: Runner | Give rights
+- name: Install runner | Give rights
   become: true
   ansible.builtin.command: usermod -aG docker gitlab-runner
 
-- name: Runner | Copy config.toml and register
+- name: Install runner | Copy config.toml and register
   become: true
   ansible.builtin.template:
     src: templates/config.j2
     dest: /etc/gitlab-runner/config.toml
   notify: Restart runner
 
-- name: Runner | Flush handlers
+- name: Install runner | Flush handlers
   ansible.builtin.meta: flush_handlers
 
 - name: Runner | Get register info
@@ -71,7 +74,7 @@
   ansible.builtin.command: gitlab-runner list
   register: runner_status
 
-- name: Runner | Show runner status
+- name: Install runner | Show runner status
   debug:
     var: runner_status
 

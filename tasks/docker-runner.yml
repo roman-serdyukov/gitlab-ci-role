@@ -1,5 +1,5 @@
 ---
-# Tasks file for gitlab-runner
+# Tasks for configure and start gitlab-runner in docker
 
 - name: Docker {{ runner }} | Copy Docker-compose file
   ansible.builtin.template:
@@ -21,11 +21,11 @@
   become: true
   docker_compose:
     project_src: /home/{{ ansible_user }}
-  register: output
+  register: output_runner
 
 - name: Show register
   debug: 
-    var: output
+    var: output_runner
 
 - name: Docker {{ runner }} | Copy config.toml ans register
   become: true

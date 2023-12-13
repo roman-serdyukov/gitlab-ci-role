@@ -1,0 +1,15 @@
+---
+# Tasks for generate token ce
+
+- name: Generate token_ce | Generate token_ce
+  ansible.builtin.shell: openssl rand -base64 48
+  run_once: true
+  register: temp_token_ce
+
+- name: Generate token_ce | Set token_ce
+  set_fact:
+    token_ce: "{{ temp_token_ce.stdout }}"
+
+- name: Generate token_ce | Show token_ce
+  debug:
+    var: token_ce
