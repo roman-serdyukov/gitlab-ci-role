@@ -11,7 +11,7 @@ Ansible role для установки gitlab-ce и gitlab-runner. Есть 2 в
 Requirements
 ------------
 
-Работоспособность протестирована на Ubuntu 20.04.
+Работоспособность протестирована на Ubuntu 20.04 и 22.04.
 
 
 Role Variables
